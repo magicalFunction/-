@@ -1,0 +1,37 @@
+public class LoopNoRecommendRemove {
+
+	class A{
+		private String as;
+		A(String as){
+			this.as = as;
+		}
+
+		public String getAs() {
+			return as;
+		}
+
+		public void setAs(String as) {
+			this.as = as;
+		}
+	}
+
+	@Test
+	public void contextLoads(){
+		ArrayList<A> arrayList = new ArrayList();
+		List<A> as = Arrays.asList(new A("1"), new A("2"), new A("3"),new A("4"),new A("5"));
+		arrayList.addAll(as);
+		JSONArray jsonArray = (JSONArray)JSON.toJSON(arrayList);
+		for (int i=0; i<arrayList.size(); i++){
+			if(arrayList.get(i).getAs().equals("3")){
+				arrayList.remove(i);
+				jsonArray.remove(i);
+				continue;
+			}
+			JSONObject a = jsonArray.getJSONObject(i);
+			a.put("m", "c");
+			System.out.println("/////////////////////////////");
+		}
+		System.out.println(jsonArray); 
+	}
+
+}
