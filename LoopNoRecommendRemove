@@ -23,9 +23,9 @@ public class LoopNoRecommendRemove {
 		JSONArray jsonArray = (JSONArray)JSON.toJSON(arrayList);
 		for (int i=0; i<arrayList.size(); i++){
 			if(arrayList.get(i).getAs().equals("3")){ 
-				arrayList.remove(i);
+				arrayList.remove(i); // 移除后，坐标i与原有数组元素会对应不上，影响数组中原来的坐标是i+1的元素的操作。
 				jsonArray.remove(i);
-				continue;
+				continue; 
 			}
 			JSONObject a = jsonArray.getJSONObject(i);
 			a.put("m", "c");
