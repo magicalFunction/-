@@ -16,15 +16,35 @@ public class LoopNoRecommendRemove {
 	}
 
 	@Test
-	public void contextLoads(){
+	public void contextLoads(){ // 错误例子
 		ArrayList<A> arrayList = new ArrayList();
 		List<A> as = Arrays.asList(new A("1"), new A("2"), new A("3"),new A("4"),new A("5"));
 		arrayList.addAll(as);
 		JSONArray jsonArray = (JSONArray)JSON.toJSON(arrayList);
 		for (int i=0; i<arrayList.size(); i++){
-			if(arrayList.get(i).getAs().equals("3")){
+			if(arrayList.get(i).getAs().equals("3")){ 
 				arrayList.remove(i);
 				jsonArray.remove(i);
+				continue;
+			}
+			JSONObject a = jsonArray.getJSONObject(i);
+			a.put("m", "c");
+			System.out.println("/////////////////////////////");
+		}
+		System.out.println(jsonArray); 
+	}
+	
+	@Test
+	public void contextLoads(){ // 正确例子
+		ArrayList<A> arrayList = new ArrayList();
+		List<A> as = Arrays.asList(new A("1"), new A("2"), new A("3"),new A("4"),new A("5"));
+		arrayList.addAll(as);
+		JSONArray jsonArray = (JSONArray)JSON.toJSON(arrayList);
+		for (int i=0; i<arrayList.size(); i++){
+			if(arrayList.get(i).getAs().equals("3")){ 
+				arrayList.remove(i);
+				jsonArray.remove(i);
+				--i; // 恢复坐标i与数组原有元素的对应
 				continue;
 			}
 			JSONObject a = jsonArray.getJSONObject(i);
